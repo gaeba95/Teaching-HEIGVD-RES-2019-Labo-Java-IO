@@ -91,6 +91,8 @@ public class Application implements IApplication {
        * quote in a text file (and for generating the directories based on the tags).
        */
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
+      String filename = "quotes-" + i + ".utf8";
+      storeQuote(quote, filename);
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
       }
@@ -123,7 +125,13 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+	  String dirs = WORKSPACE_DIRECTORY + "/quotes";
+	  for (String tag : quote.getTags()) {
+	    dirs += "/" + tag;
+	  }
+	  new File(dirs).mkdirs();
+	  File file = new File(dirs + "/" + filename);
+	  file.createNewFile();
   }
   
   /**
