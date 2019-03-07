@@ -7,8 +7,12 @@ import ch.heigvd.res.labio.interfaces.IFileExplorer;
 import ch.heigvd.res.labio.interfaces.IFileVisitor;
 import ch.heigvd.res.labio.quotes.QuoteClient;
 import ch.heigvd.res.labio.quotes.Quote;
+
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.logging.Level;
@@ -125,13 +129,14 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-	  String dirs = WORKSPACE_DIRECTORY + "/quotes";
+	  String dirs = WORKSPACE_DIRECTORY;
 	  for (String tag : quote.getTags()) {
 	    dirs += "/" + tag;
 	  }
 	  new File(dirs).mkdirs();
-	  File file = new File(dirs + "/" + filename);
-	  file.createNewFile();
+	  Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dirs + "/" + filename), "utf-8"));
+	  writer.write(quote.getQuote());
+	  writer.close();
   }
   
   /**
@@ -148,6 +153,14 @@ public class Application implements IApplication {
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
+    	  if(file.isFile()) {
+              System.out.println(file.getPath());
+            }else if(file.isDirectory()) {
+              System.out.println(file.getPath());
+              for(File son : file.listFiles()) {
+                visit(son);
+              }
+            }
       }
     });
   }
