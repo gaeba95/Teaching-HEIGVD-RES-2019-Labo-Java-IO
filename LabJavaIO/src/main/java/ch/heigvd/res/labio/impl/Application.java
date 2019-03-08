@@ -134,7 +134,7 @@ public class Application implements IApplication {
 	    dirs += "/" + tag;
 	  }
 	  new File(dirs).mkdirs();
-	  Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dirs + "/" + filename), "utf-8"));
+	  Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dirs + "/" + filename), "UTF-8"));
 	  writer.write(quote.getQuote());
 	  writer.close();
   }
@@ -153,14 +153,14 @@ public class Application implements IApplication {
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
-    	  if(file.isFile()) {
-              System.out.println(file.getPath());
-            }else if(file.isDirectory()) {
-              System.out.println(file.getPath());
-              for(File son : file.listFiles()) {
-                visit(son);
-              }
-            }
+    	 
+    	  
+    	  try {
+    		  //System.out.println(file.getPath() + "/" + file.getName());
+    		  writer.write(file.getPath());
+    	  } catch(IOException io) {
+    		  System.out.println(io);
+    	  }
       }
     });
   }
