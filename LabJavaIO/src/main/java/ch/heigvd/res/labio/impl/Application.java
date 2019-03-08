@@ -156,7 +156,7 @@ public class Application implements IApplication {
     	 
     	  
     	  try {
-    		  //System.out.println(file.getPath() + "/" + file.getName());
+    		 
     		  writer.write(file.getPath());
     	  } catch(IOException io) {
     		  System.out.println(io);
