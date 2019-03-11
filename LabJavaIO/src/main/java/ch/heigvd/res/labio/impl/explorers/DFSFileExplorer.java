@@ -22,7 +22,6 @@ public class DFSFileExplorer implements IFileExplorer {
       	vistor.visit(rootDirectory);
       } else {
     	  if(rootDirectory.isFile()) {
-    		  System.out.println(rootDirectory.getPath());
     		  vistor.visit(rootDirectory);
             }else if(rootDirectory.isDirectory()) {
             	
@@ -30,9 +29,7 @@ public class DFSFileExplorer implements IFileExplorer {
               Arrays.sort(files);
               vistor.visit(rootDirectory);
               for(File son : files) {
-            	  if(rootDirectory.isDirectory()) {
-            		  explore(son, vistor);
-            	  }
+            	 explore(son, vistor);
             	  
               }
               
