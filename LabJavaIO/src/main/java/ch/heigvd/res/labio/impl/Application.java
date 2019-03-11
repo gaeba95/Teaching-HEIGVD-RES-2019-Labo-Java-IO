@@ -95,7 +95,7 @@ public class Application implements IApplication {
        * quote in a text file (and for generating the directories based on the tags).
        */
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
-      String filename = "quotes-" + i + ".utf8";
+      String filename = "quote-" + (i+1) + ".utf8";
       storeQuote(quote, filename);
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -157,7 +157,7 @@ public class Application implements IApplication {
     	  
     	  try {
     		 
-    		  writer.write(file.getPath());
+    		  writer.write(file.getPath() + "\n");
     	  } catch(IOException io) {
     		  System.out.println(io);
     	  }
