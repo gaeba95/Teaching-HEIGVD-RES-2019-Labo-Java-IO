@@ -12,6 +12,7 @@ import java.util.Arrays;
  * files in the directory and then moves into the subdirectories.
  * 
  * @author Olivier Liechti
+ * Modified by : Bacso Gaetan
  */
 public class DFSFileExplorer implements IFileExplorer {
 
@@ -35,10 +36,6 @@ public class DFSFileExplorer implements IFileExplorer {
               
             }
       }
-	  
-	  
-	  
-    //throw new UnsupportedOperationException("The student has not implemented this method yet.");
   }
 
 }

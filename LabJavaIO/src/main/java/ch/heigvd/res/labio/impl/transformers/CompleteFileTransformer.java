@@ -13,6 +13,7 @@ import ch.heigvd.res.labio.impl.filters.UpperCaseFilterWriter;
  * beginning of each line.
  * 
  * @author Olivier Liechti
+ * Modified by : Bacso Gaetan
  */
 public class CompleteFileTransformer extends FileTransformer {
 

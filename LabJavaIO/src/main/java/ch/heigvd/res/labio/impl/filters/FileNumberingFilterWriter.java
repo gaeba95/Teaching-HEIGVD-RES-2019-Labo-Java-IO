@@ -15,19 +15,21 @@ import java.util.logging.Logger;
  * Hello\n\World -> 1\Hello\n2\tWorld
  *
  * @author Olivier Liechti
+ * Modified by : Bacso Gaetan
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
-  private boolean start;
+  // Variable de détection d'un '\r'
   private boolean back;
+  // Compteur du nombre de ligne
   private int cnt;
   
 
   public FileNumberingFilterWriter(Writer out) {
     super(out);
-    cnt = 1;
-    start = true;
+    // Initalisation
+    cnt = 0;
     back = false;
   }
 
@@ -46,9 +48,10 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
-	  if(start){
-          start = false;
-          this.out.write(cnt++ + "\t");
+	  // Cas pour la première ligne
+	  if(cnt == 0){
+          this.out.write(++cnt + "\t");
+          cnt++;
       }
 	  
 	  if(c == '\r') {
